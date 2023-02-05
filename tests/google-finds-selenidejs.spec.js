@@ -1,5 +1,5 @@
 import "chromedriver";
-import { jest, test, beforeEach, afterAll } from "@jest/globals";
+import { test, beforeEach, afterAll } from "@jest/globals";
 import { browser, by, be, have } from "selenidejs";
 
 const query = browser.element(by.name("q"));
