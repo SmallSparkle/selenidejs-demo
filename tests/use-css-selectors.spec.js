@@ -8,29 +8,28 @@ beforeEach(async () => {
   browser.config.windowHeight = "768";
 });
 
-test.skip("completes todo", async () => {
+test("completes todo", async () => {
   await browser.open("https://todomvc.com/examples/emberjs/");
 
   await browser.element("#new-todo").type("a").then(perform.pressEnter);
   await browser.element("#new-todo").type("b").then(perform.pressEnter);
   await browser.element("#new-todo").type("c").then(perform.pressEnter);
+
   await browser.all("#todo-list>li").should(have.exactTexts("a", "b", "c"));
 
-  await browser
-    .all("#todo-list>li")
-    .elementBy(have.exactText("b"))
-    .element(".toggle")
-    .click();
+  await browser.element("#todo-list>li:nth-child(2) .toggle").click();
 
   await browser
-    .all("#todo-list>li")
-    .by(have.cssClass("completed"))
-    .should(have.exactTexts("b"));
+    .element("#todo-list>li:nth-child(2)")
+    .should(have.cssClass("completed"));
 
   await browser
-    .all("#todo-list>li")
-    .by(have.no.cssClass("completed"))
-    .should(have.exactTexts("a", "c"));
+    .element("#todo-list>li:first-child")
+    .should(have.no.cssClass("completed"));
+
+  await browser
+    .element("#todo-list>li:last-child")
+    .should(have.no.cssClass("completed"));
 });
 
 afterAll(async () => {

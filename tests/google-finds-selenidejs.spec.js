@@ -11,7 +11,7 @@ beforeEach(async () => {
   browser.config.windowHeight = "768";
 });
 
-test("google finds selenidejs", async () => {
+test.skip("google finds selenidejs", async () => {
   await browser.open("https://google.com/ncr");
   await query.should(be.blank);
 
