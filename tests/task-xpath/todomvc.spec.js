@@ -11,23 +11,20 @@ test('completes todo', async () => {
   await browser.element('//*[@id="new-todo"]').type('c').then(perform.pressEnter);
   await browser.all('//*[@class="todo-list"]/li').should(have.exactTexts('a', 'b', 'c'));
 
-  await browser.element('(//*[@class="todo-list"]/li//input[@class="toggle"])[2]').click();
+  await browser.element('//*[@id="todo-list"]/li[.//text()="b"]').click();
   
   //THEN
-//first solution
   await browser
-    .element('//*[@class="todo-list"]//label[text()="b"]/ancestor::li')
-    .should(have.cssClass('completed'));  
-// second solution
-    // .all('//*[@class="todo-list"]//li[contains(@class, "completed")]') 
-    // .should(have.exactTexts('b'));
+    .all('//*[@id="todo-list"]/li[contains(concat(" ", normalize-space(@class), " "), " completed ")]') 
+    .should(have.exactTexts('b'));
 
   await browser
-    .all('//*[@class="todo-list"]/li[not(contains(@class,"completed"))]')
+    .all('//*[@id="todo-list"]/li[not(contains(concat(" ", normalize-space(@class), " "), " completed "))]')
     .should(have.exactTexts('a', 'c'));
   await browser
-    .all('//*[@class="todo-list"]/li')
+    .all('//*[@id="todo-list"]/li')
     .should(have.exactTexts('a', 'b', 'c'));  
+    
 });
 
 afterAll(async () => {
