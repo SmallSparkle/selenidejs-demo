@@ -4,14 +4,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "jest": {
-    "verbose": true,
-    "testTimeout": 40000,
-    "forceExit": true,
-    "detectOpenHandles": true
-  },
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles"
   },
   "keywords": [],
   "author": "",
