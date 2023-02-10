@@ -12,19 +12,17 @@ test('completes todo', async () => {
   await browser.all('//*[@class="todo-list"]/li').should(have.exactTexts('a', 'b', 'c'));
 
   await browser.element('//*[@id="todo-list"]/li[.//text()="b"]').click();
-  
+
   //THEN
   await browser
     .all('//*[@id="todo-list"]/li[contains(concat(" ", normalize-space(@class), " "), " completed ")]') 
     .should(have.exactTexts('b'));
-
   await browser
     .all('//*[@id="todo-list"]/li[not(contains(concat(" ", normalize-space(@class), " "), " completed "))]')
     .should(have.exactTexts('a', 'c'));
   await browser
     .all('//*[@id="todo-list"]/li')
     .should(have.exactTexts('a', 'b', 'c'));  
-    
 });
 
 afterAll(async () => {
