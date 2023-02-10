@@ -12,7 +12,7 @@ test('completes todo', async () => {
   await browser.all('//*[@class="todo-list"]/li').should(have.exactTexts('a', 'b', 'c'));
 
   await browser
-    .element('//*[@id="todo-list"]/li[.//text()="b"]//*[contains(concat(" ", @class, " "), "toggle")]')
+    .element('//*[@id="todo-list"]/li[.//text()="b"]//*[contains(concat(" ", @class, " "), " toggle ")]')
     .click();
 
   await browser
