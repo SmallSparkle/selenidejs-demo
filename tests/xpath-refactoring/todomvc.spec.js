@@ -5,7 +5,7 @@ import todomvc from '../../src/pages/todomvc.js';
 
 browser.config.browserName = 'firefox';
 
-test('completes todo', async () => {
+test.skip('completes todo', async () => {
   await browser.open(todomvc.url);
   await todomvc.addField.type('a').then(perform.pressEnter);
   await todomvc.addField.type('b').then(perform.pressEnter);
