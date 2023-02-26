@@ -3,7 +3,6 @@ import { browser } from 'selenidejs';
 const url = 'https://todomvc.com/examples/emberjs/'
 const addField = browser.element('//*[@id="new-todo"]');
 const todoList = browser.all('//*[@class="todo-list"]/li');
-// const Tasck = browser.element('//*[@id="todo-list"]/li[.//text()="b"]//*[contains(concat(" ", normalize-space(@class), " "), " toggle ")]')
 
 function compliteTodoTasck(tasckName) {
   const selector = '//*[@id="todo-list"]/li[.//text()="'+ tasckName + '"]//*[contains(concat(" ", normalize-space(@class), " "), " toggle ")]';
