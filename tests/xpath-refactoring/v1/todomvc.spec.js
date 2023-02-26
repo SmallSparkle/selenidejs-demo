@@ -1,7 +1,7 @@
 import 'geckodriver';
 import { test, afterAll } from '@jest/globals';
 import { browser, perform, have } from 'selenidejs';
-import todomvc from '../../src/pages/todomvc.js';
+import todomvc from '../../../src/pages/todomvc.js';
 
 browser.config.browserName = 'firefox';
 

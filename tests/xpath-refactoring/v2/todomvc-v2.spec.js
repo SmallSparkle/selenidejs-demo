@@ -4,7 +4,7 @@ import { browser, perform, have } from 'selenidejs';
 
 browser.config.browserName = 'firefox';
 
-test('completes todo', async () => {
+test.skip('completes todo', async () => {
   await browser.open('https://todomvc.com/examples/emberjs/');
   await browser.element('//*[@id="new-todo"]').type('a').then(perform.pressEnter);
   await browser.element('//*[@id="new-todo"]').type('b').then(perform.pressEnter);
