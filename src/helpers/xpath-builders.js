@@ -1,7 +1,7 @@
-export function findByCssClass(xpath, cssClass) {
-    return xpath + '[contains(concat(" ", normalize-space(@class), " "), "' + cssClass + '")]';
+function hasCssClass(cssClass) {
+    return 'contains(concat(" ", normalize-space(@class), " "), " ' + cssClass + ' ")';
 };
 
-export function findByNoCssClass(xpath, cssClass) {
-    return xpath + '[not(contains(concat(" ", normalize-space(@class), " "), " ' + cssClass + ' "))]';
+export default {
+    hasCssClass 
 };
