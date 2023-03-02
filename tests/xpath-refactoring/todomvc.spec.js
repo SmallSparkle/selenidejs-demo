@@ -1,7 +1,7 @@
 import 'geckodriver';
 import { test, afterAll } from '@jest/globals';
 import { browser, perform, have } from 'selenidejs';
-import xpath from '../../../src/helpers/xpath.js';
+import xpath from '../../src/helpers/xpath.js';
 
 browser.config.browserName = 'firefox';
 
@@ -20,7 +20,7 @@ test('completes todo', async () => {
     .all('//*[@id="todo-list"]/li[' + xpath.hasCssClass('completed') + ']')
     .should(have.exactTexts('b'));
   await browser
-    .all('//*[@id="todo-list"]/li[not('+ xpath.hasCssClass('completed')+ ')]')
+    .all('//*[@id="todo-list"]/li[not(' + xpath.hasCssClass('completed') + ')]')
     .should(have.exactTexts('a', 'c'));
   await browser
     .all('//*[@id="todo-list"]/li')
