@@ -1,7 +1,7 @@
 import 'geckodriver';
 import { test, afterAll } from '@jest/globals';
 import { browser, perform, have } from 'selenidejs';
-import xpathBuilders from '../../../src/helpers/xpath-builders.js';
+import xpath from '../../../src/helpers/xpath.js';
 
 browser.config.browserName = 'firefox';
 
@@ -13,14 +13,14 @@ test('completes todo', async () => {
   await browser.all('//*[@class="todo-list"]/li').should(have.exactTexts('a', 'b', 'c'));
 
   await browser
-    .element('//*[@id="todo-list"]/li[.//text()="b"]//*[' + xpathBuilders.hasCssClass('toggle') + ']')
+    .element('//*[@id="todo-list"]/li[.//text()="b"]//*[' + xpath.hasCssClass('toggle') + ']')
     .click();
 
   await browser
-    .all('//*[@id="todo-list"]/li[' + xpathBuilders.hasCssClass('completed') + ']')
+    .all('//*[@id="todo-list"]/li[' + xpath.hasCssClass('completed') + ']')
     .should(have.exactTexts('b'));
   await browser
-    .all('//*[@id="todo-list"]/li[not('+ xpathBuilders.hasCssClass('completed')+ ')]')
+    .all('//*[@id="todo-list"]/li[not('+ xpath.hasCssClass('completed')+ ')]')
     .should(have.exactTexts('a', 'c'));
   await browser
     .all('//*[@id="todo-list"]/li')
