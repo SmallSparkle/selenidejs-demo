@@ -1,10 +1,13 @@
 import 'geckodriver';
 import { test, afterAll } from '@jest/globals';
-import { browser, perform, have } from 'selenidejs';
+import { browser, perform, have, } from 'selenidejs';
+import its from '../../src/builder/its.js';
+import {x} from '../../src/builder/xpath-builder.js';
+// import x from '../../src/builder/xpath-builder.js';
 
 browser.config.browserName = 'firefox';
 
-test.skip('completes todo', async () => {
+test('completes todo', async () => {
   await browser.open('https://todomvc.com/examples/emberjs/');
   await browser.element('//*[@id="new-todo"]').type('a').then(perform.pressEnter);
   await browser.element('//*[@id="new-todo"]').type('b').then(perform.pressEnter);
@@ -12,15 +15,34 @@ test.skip('completes todo', async () => {
   await browser.all('//*[@class="todo-list"]/li').should(have.exactTexts('a', 'b', 'c'));
 
   await browser
-    .element('//*[@id="todo-list"]/li[.//text()="b"]//*[contains(concat(" ", normalize-space(@class), " "), " toggle ")]')
-    .click();
+    .element(
+      x.all()
+      .by(its.id('todo-list'))
+      .child('li')
+      .by(its.text('b'))
+      .descendant()
+      .by(its.cssClass('toggle'))
+      .x()
+    ).click();
 
   await browser
-    .all('//*[@id="todo-list"]/li[contains(concat(" ", normalize-space(@class), " "), " completed ")]') 
-    .should(have.exactTexts('b'));
+    .all(
+      x.all().
+      by(its.id('todo-list'))
+      .child('li')
+      .by(its.cssClass('completed'))
+      .x()
+      ).should(have.exactTexts('b'));
+
   await browser
-    .all('//*[@id="todo-list"]/li[not(contains(concat(" ", normalize-space(@class), " "), " completed "))]')
-    .should(have.exactTexts('a', 'c'));
+    .all(
+      x.all().
+      by(its.id('todo-list'))
+      .child('li')
+      .by('not' + its.cssClass('completed'))
+      .x()
+    ).should(have.exactTexts('a', 'c'));
+
   await browser
     .all('//*[@id="todo-list"]/li')
     .should(have.exactTexts('a', 'b', 'c'));  
